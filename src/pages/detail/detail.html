@@ -26,6 +26,7 @@
     </ion-item>
   </ion-list>
   <div padding >
-    <button ion-button block (click)="addNote()" >Guardar Nota </button>
+    <button ion-button block (click)="addNote()" >Guardar</button>
+    <button *ngIf="id != 0" ion-button block (click)="deleteNote()" color="danger">Eliminar</button>
   </div>
 </ion-content>

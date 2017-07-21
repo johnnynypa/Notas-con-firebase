@@ -12,13 +12,26 @@ export class DetailPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public notesService:NotesService) {
     this.id = navParams.get('id');
     if(this.id != 0){
-      this.note = notesService.getNote(this.id);
+      notesService.getNote(this.id)
+      .subscribe( nota =>{
+        this.note = nota;
+      })
     }
   }
 
   addNote(){
-    this.note.id = Date.now();
-    this.notesService.createNote(this.note);
+    if(this.id != 0){
+      //Editando
+      this.notesService.editNote(this.note);
+    }else{
+      this.note.id = Date.now();
+      this.notesService.createNote(this.note);
+    }
+    this.navCtrl.pop();
+  }
+
+  deleteNote(){
+    this.notesService.deleteNote(this.note);
     this.navCtrl.pop();
   }
 
